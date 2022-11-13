@@ -31,11 +31,6 @@ pipeline {
             
         }
     } 
-     stage('run application on minikube'){
-         steps {
-        sh 'minikube kubectl -- apply -f deployment-service.yml -n angular'
-        }     
-         
-     }
+
 }
 }
