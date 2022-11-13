@@ -1,0 +1,37 @@
+piVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops          
+  labels:
+    app: devops
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: devops
+  template:
+    metadata:
+      labels:
+        app: devops
+    spec:
+      containers:
+      - name: devops
+        image: firaschikhaoui/devops:latest
+        ports:
+        - containerPort: 80
+---
+
+kind: Service  # Kubernetes API version
+apiVersion: v1 # Kubernetes resource kind we are creating
+metadata:
+  name: devops
+spec:
+  selector:
+    app: devops
+  ports:
+  - protocol: TCP
+    port: 80   # The port that the service is running on in the cluster
+    targetPort: 80   # The port exposed by the service
+    nodePort: 31000
+  type: NodePort     # type of the service.
+
